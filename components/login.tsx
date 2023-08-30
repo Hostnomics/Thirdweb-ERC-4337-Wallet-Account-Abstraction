@@ -10,6 +10,7 @@ import loadingLottie from '../assets/lottie/loading.json';
 // import loadingLottie from '../assets/lottie/loading.json';
 import LottieLoader from 'react-lottie-loader';
 import { connectToSmartWallet } from '../lib/wallets';
+import { Connected } from './connected';
 
 
 type LoginProps = {
@@ -70,9 +71,13 @@ export const Login: React.FC<LoginProps> = ({ isOpen, onClose }) => {
 
 // (16:54) - Check for various states: 
   return username && signer ? (
-    // build out ifConnected Component at (41:10): https://youtu.be/D58EhH2em5s?si=NpPwt6Pv1HvzWMUO&t=2470
+    // build out connected.tsx Component at (41:10): https://youtu.be/D58EhH2em5s?si=NpPwt6Pv1HvzWMUO&t=2470
+    //Then reviewed this Connected component display at (46:06): https://youtu.be/D58EhH2em5s?si=z4aJNW0zcBZK5A5E&t=2766
     <>
-      <p>Connected</p>
+        <Connected
+            signer={signer}
+            username={username}
+        />
     </>
   ) : isLoading ? (
       <div className={styles.card}>

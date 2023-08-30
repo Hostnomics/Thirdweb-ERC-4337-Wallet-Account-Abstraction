@@ -9,4 +9,7 @@ export const chain = Mumbai;
 export const factoryAddress = "0x67831d76DAB9B3ad49c7d6cc3C7C29f391b73Cf0";
 
 //NFT collection that we do claims on once we have set up our login (22:54)
-export const nftCollection = "0x7019c5b78592C10258E8fEe26dF15dCC0Ad53bB";
+//https://thirdweb.com/mumbai/0xe3Ec3596Ca66aa5b223Fe5710Ff7622cDb2E066D
+//wasae's addy: 
+// export const nftCollection = "0x7019c5b78592C10258E8fEe26dF15dCC0Ad53bB";
+export const nftCollection = "0xe3Ec3596Ca66aa5b223Fe5710Ff7622cDb2E066D";

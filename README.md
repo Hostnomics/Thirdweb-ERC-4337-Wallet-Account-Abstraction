@@ -38,3 +38,14 @@
 - import **SmartWallet** into `lib/wallets.ts`
 
 5. At [(41:21)](https://youtu.be/D58EhH2em5s?si=uufpEcxutIrDImmV&t=2481) we run through a test of our smart login process.
+
+6. At [(42:54)](https://youtu.be/D58EhH2em5s?si=xSTdYKawp1J8Kh5w&t=2574) build out the `connected.tsx` component for the user who has successfully connected.
+
+## Minor Typos
+
+1. Function Name
+
+2. NFTClaim Prop - remove `default` from **export function NFTClaim()...**
+   export default function NFTClaim({ contractMetadata }: ClaimProps) {
+
+At [(45:40)](https://youtu.be/D58EhH2em5s?si=ibSf1TESITT0N4E9&t=2740)
