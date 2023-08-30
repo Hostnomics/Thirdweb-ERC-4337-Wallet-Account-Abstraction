@@ -1,40 +1,40 @@
-## Getting Started
+## Setup
 
-Create a project using this example:
+1. Deploy the Demo NFT Collection from [Credential Account Factory](https://thirdweb.com/joenrv.eth/CredentialAccountFactory).
 
-```bash
-npx thirdweb create --template next-typescript-starter
-```
+- - It has a `CredentialAccount.sol` file with a `register` function for `username` and `metadataURI`
+    - After deploy, copy the CredentialAccountFactory address. [(at 11:32)](https://youtu.be/D58EhH2em5s?si=-IBr373HRuI780Rr&t=692)
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+2. Create the **App** (at 11:54)
 
-On `pages/_app.tsx`, you'll find our `ThirdwebProvider` wrapping your app, this is necessary for our [hooks](https://portal.thirdweb.com/react) and
-[UI Components](https://portal.thirdweb.com/ui-components) to work.
+- In desired directory, run command:
 
-## Environment Variables
+  - `npx thirdweb@latest create app`
+    - Name project (`walletexperiment`)
+    - Select **EVM** network since we deployed to mumbai.
+    - Select **Next.js** with **TypeScript**.
 
-To run this project, you will need to add environment variables. Check the `.env.example` file for all the environment variables required and add it to `.env.local` file or set them up on your hosting provider.
+- To install in current directory named `walletexperiment`:
+  - `npx thirdweb@latest create . --app`
+    - Name project `./`
+    - Select **EVM** network since we deployed to mumbai.
+    - Select **Next.js** with **TypeScript**.
 
-## Deploy to IPFS
+3. Lottie Loading File from [Lottie Files.com](https://lottiefiles.com/)
 
-Deploy a copy of your application to IPFS using the following command:
+- The animation shown at [(18:55)](https://youtu.be/D58EhH2em5s?si=4nZJEF8blDyHBF6Q&t=1135) was not provided, so I used another animation from [LottieFiles.com here](https://lottiefiles.com/animations/circules-22ZLntsKLN)
+- At [(19:13)](https://youtu.be/D58EhH2em5s?si=PLFCpF99J2NSXsDr&t=1153) install the **react LottieLoader** with this command:
+  - NPM **LottieLoader** package from [react-lottie-loader](https://www.npmjs.com/package/react-lottie-loader)
+  - `yarn add react-lottie-loader`
+  - or with npm:
+    - `npm i react-lottie-loader`
+-
 
-```bash
-yarn deploy
-```
+4. Install Thirdweb's wallets package [at (25:45)](https://youtu.be/D58EhH2em5s?si=Jlqrky-dDpqCgmvx&t=1545)
 
-## Learn More
+- Instal package with yarn or npm:
+  - `yarn add @thirdweb-dev/wallets`
+  - `npm i @thirdweb-dev/wallets`
+- import **SmartWallet** into `lib/wallets.ts`
 
-To learn more about thirdweb and Next.js, take a look at the following resources:
-
-- [thirdweb React Documentation](https://docs.thirdweb.com/react) - learn about our React SDK.
-- [thirdweb TypeScript Documentation](https://docs.thirdweb.com/typescript) - learn about our JavaScript/TypeScript SDK.
-- [thirdweb Portal](https://docs.thirdweb.com) - check our guides and development resources.
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Templates](https://thirdweb.com/templates)
-
-You can check out [the thirdweb GitHub organization](https://github.com/thirdweb-dev) - your feedback and contributions are welcome!
-
-## Join our Discord!
-
-For any questions, suggestions, join our discord at [https://discord.gg/thirdweb](https://discord.gg/thirdweb).
+5. At [(41:21)](https://youtu.be/D58EhH2em5s?si=uufpEcxutIrDImmV&t=2481) we run through a test of our smart login process.
