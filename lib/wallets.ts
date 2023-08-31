@@ -38,7 +38,7 @@ export async function getWalletAddressForUser(
 ): Promise<string> {
   const factory = await sdk.getContract(factoryAddress);
   const smartWalletAddress: string = await factory.call(
-    "accountOfUsername",  //at (28:10) via the Thirdweb Explorer console (Read), the function name is `accountOfUsername`, (lowercase 'n') NOT `accountOfUserName` as shown at (27:50)
+    "accountOfUsername",  //at (28:10) per the Thirdweb Explorer console (Read), the function name is `accountOfUsername`, (lowercase 'n') NOT `accountOfUserName` as shown at (27:50)
     [username]
   );
   return smartWalletAddress;

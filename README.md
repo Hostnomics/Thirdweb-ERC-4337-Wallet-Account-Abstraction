@@ -1,3 +1,19 @@
+## NOTE
+
+**At minute [(28:17)](https://youtu.be/D58EhH2em5s?si=zQ10760P_PstgV4e&t=1697) I believe there was a typo when calling the solidity function `accountOfUsername`**
+
+In the tutorial, it was shown as `accountOfUser*N*ame` with an uppercase 'N'. I caught the error trouble shooting it in the console and I noticed that the function in the underlying solidity contract was `accountOfUsername`.
+
+See the [underlying solidity contract here.](https://thirdweb.com/mumbai/0xe3Ec3596Ca66aa5b223Fe5710Ff7622cDb2E066D/sources)
+
+### Summary
+
+This repository was made while following a tutorial from ThirdWeb's Sean Watase on experimenting with an onchain way to authenticate a user signin using Account Abstraction (ERC-4337). You can [view the tutorial on youtube at this link. (Posted on 8/22/2023)](https://www.youtube.com/watch?v=D58EhH2em5s)
+
+There are a lot of comments with approximate time stamps for my personal reference.
+
+This repository is not affilated with Thirdweb. Use at your own peril ;)
+
 ## Setup
 
 1. Deploy the Demo NFT Collection from [Credential Account Factory](https://thirdweb.com/joenrv.eth/CredentialAccountFactory).
@@ -41,11 +57,13 @@
 
 6. At [(42:54)](https://youtu.be/D58EhH2em5s?si=xSTdYKawp1J8Kh5w&t=2574) build out the `connected.tsx` component for the user who has successfully connected.
 
-## Minor Typos
+## Final Note To Self
 
-1. Function Name
+In the NFTClaim Component (`nft-claim.tsx`) I was able to resolve an error I was receiving by removing `default` from `**export function NFTClaim()...**`
 
-2. NFTClaim Prop - remove `default` from **export function NFTClaim()...**
+At [(45:40)](https://youtu.be/D58EhH2em5s?si=ibSf1TESITT0N4E9&t=2740) of the tutorial the function was declared as:
+
+```js
    export default function NFTClaim({ contractMetadata }: ClaimProps) {
 
-At [(45:40)](https://youtu.be/D58EhH2em5s?si=ibSf1TESITT0N4E9&t=2740)
+```
