@@ -13,3 +13,5 @@ export const factoryAddress = "0x67831d76DAB9B3ad49c7d6cc3C7C29f391b73Cf0";
 //wasae's addy: 
 // export const nftCollection = "0x7019c5b78592C10258E8fEe26dF15dCC0Ad53bB";
 export const nftCollection = "0xe3Ec3596Ca66aa5b223Fe5710Ff7622cDb2E066D";
+
+export const solidityContractAddress = "0x4779320Da5E3AD1858A39422d62B5eeDb7fD6C57";

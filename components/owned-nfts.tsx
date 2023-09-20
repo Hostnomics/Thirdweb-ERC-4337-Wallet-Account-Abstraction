@@ -21,9 +21,10 @@ export const OwnedNFTs: React.FC<OwnedNFTsProps> = ({ ownedNFTs, isLoading }) =>
                     width: "100%",
                 }}
             >
-                <h2>My Collectibles</h2>
+                {/* <h2>My Collectibles</h2> */}
                 {isLoading ? (
-                    <p>Loading...</p>
+                    // <p>Loading...</p>
+                    <p>{" "}</p>
                 ) : (
                     <>
                         <p style={{
@@ -106,7 +107,8 @@ export const OwnedNFTs: React.FC<OwnedNFTsProps> = ({ ownedNFTs, isLoading }) =>
                         fontSize: "small",
 
                     }}>
-                        You don't own any collectibles yet!
+                        {/* You don't own any collectibles yet! */}
+                        You don't have any prescriptions yet. 
                     </p>
 
                 </div>

@@ -1,8 +1,9 @@
 //Built out at (42:54): https://youtu.be/D58EhH2em5s?si=xSTdYKawp1J8Kh5w&t=2574
 
-import { ThirdwebSDKProvider, useAddress, useContract, useContractMetadata, useOwnedNFTs } from '@thirdweb-dev/react'
-import { Signer } from 'ethers'
-import { THIRDWEB_API_KEY, chain, nftCollection } from '../lib/constants' 
+import { ThirdwebSDKProvider, useAddress, useContract, useContractMetadata, useOwnedNFTs,
+          ConnectWallet, ThirdwebNftMedia } from '@thirdweb-dev/react';
+import { Signer, ethers } from 'ethers'
+import { THIRDWEB_API_KEY, chain, nftCollection, solidityContractAddress } from '../lib/constants' 
 
 import styles from "../styles/Home.module.css";
 
@@ -12,10 +13,13 @@ import LottieLoader from 'react-lottie-loader';
 import { NFTClaim } from '../components/nft-claim'
 import { OwnedNFTs } from '../components/owned-nfts'
 
-// import { Navbar } from "./navbar";
+import {Navbar} from './navbar';
+// import { NavbarDashboard } from "./navbar-dashboard";
+
+import Link from "next/link";
 
 
-export const Connected = ({
+export const PatientDashboard = ({
     username,
     signer,
 } : {
@@ -44,9 +48,11 @@ const ConnectedInner = ({ username } : { username: string} ) => {
         return address.slice(0,6) + "..." + address.slice(-4);
     }
 
-    const {
-        contract 
-    } = useContract(nftCollection);
+    // const {
+    //     contract 
+    // } = useContract(nftCollection);
+    const { contract } = useContract(solidityContractAddress); // 13.1- Improved metadata and function callls (5/23/23)
+
     const {
         data: contractMetadata,
         isLoading: contractMetadataLoading,
@@ -61,21 +67,26 @@ const ConnectedInner = ({ username } : { username: string} ) => {
         window.location.reload();
     }
 
+
+
     return (
         <div className={styles.appContainer}>
-            {/* <Navbar 
-                gotAddress={address}
-            /> */}
-
+    {/* <NavbarDashboard displayNav={false} logout={false}/> */}
+    <Navbar gotAddress={address} logout={true}/>
             <div>
                 {address && (
                     <>
-                        <h1>Welcome <span className={styles.gradientText1}>{username}</span></h1>
-                        <p className={styles.addressPill}>Short Version: {truncateAddress(address!)}</p>
-                        <p className={styles.addressPill}>Full Version: {address}</p>
-                        {address && 
-                            <button className='btn btn-warning' onClick={handleRefresh}>Log Out</button>
-                        }
+                        <div className="mt-5">
+                            {/* <h1 className="text-center">Welcome <span className={styles.gradientText1}>{username}</span> To Your Prescription Dashboard</h1> */}
+                            <h1 className="text-center">Welcome <span className={styles.gradientText1}>Ian McGregor</span> To Your Prescription Dashboard</h1>
+
+                            {/* <p className={styles.addressPill}>Short Version: {truncateAddress(address!)}</p> */}
+                            {/* <p className={styles.addressPill}>Your Wallet Address: {address}</p> */}
+            
+                            {/* <h2 className={`align-center text-center ${styles.gradientText1}`}>Your Wallet Address: <span className={styles.gradientText1}>{address}</span></h2> */}
+                            <h2 className={`align-center text-center`}>Your Wallet Address: <span className={styles.gradientText1}>{address}</span></h2>
+                        </div>
+                        
                     </>
                 )}
             </div>

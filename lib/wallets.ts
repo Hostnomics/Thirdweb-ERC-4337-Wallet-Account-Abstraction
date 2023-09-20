@@ -6,7 +6,7 @@
           // - if already have account, retrieve ipfs metadata, import and connect
 
 // import our constants
-import { THIRDWEB_API_KEY, chain, factoryAddress } from './constants';
+import { THIRDWEB_API_KEY, chain, factoryAddress } from './constants'; 
 
 // import Thirdweb's SmartWallet
 // import { SmartWallet, LocalWallet } from '@thirdweb-dev/wallets';
@@ -109,6 +109,7 @@ export async function connectToSmartWallet(
         return smartWallet;
 
     } else {
+      
 //IF THEY DON'T HAVE AN ACCOUNT REGISTERED TO THEIR USERNAME WE CREATE THAT ACCOUNT HERE: (35:20)
         statusCallback?.("New username, generating personal wallet...");
         await personalWallet.generate();

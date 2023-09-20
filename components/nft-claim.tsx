@@ -13,10 +13,14 @@ type ClaimProps = {
 // At (45:40) the nft-claim.tsx export function has typo default? Tried removing 'default' and it worked for me: export default function NFTClaim({ contractMetadata }: ClaimProps) {
 // export default function NFTClaim({ contractMetadata }: ClaimProps) {
 export function NFTClaim({ contractMetadata }: ClaimProps) {
+
+    console.log("contractMetadata es: ",contractMetadata)
+
     return (
         <>
-
-            <h2>{contractMetadata?.name}</h2>
+            <hr></hr>
+            {/* <h2>Prescriptions For Patient: {contractMetadata?.name}</h2> */}
+            {/* <h2>Prescriptions For Patient: Ian</h2> */}
 
                 <MediaRenderer 
                     src={contractMetadata?.image}
@@ -36,7 +40,8 @@ export function NFTClaim({ contractMetadata }: ClaimProps) {
                         width: "80%",
                     }}
                 >
-                    Claim Collectible
+                    {/* Claim Collectible */}
+                    Manage Your Prescriptions
                 </Web3Button>
         
         </>

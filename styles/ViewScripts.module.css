@@ -1,0 +1,247 @@
+.row {
+    padding-top:20px;
+}
+
+.box_size{
+    width:50%;
+    margin:auto;
+}
+
+.nft_box_size{
+    width:95%;
+    margin:auto;
+}
+
+
+/* Quick NFT Card Fix From: https://www.youtube.com/watch?v=HFl_oT5tKfo  */
+/* SOURCE: @Thirdweb https://github.com/thirdweb-dev/examples/blob/main/typescript/gallery-example/Home.module.css  */
+.view-scripts-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* width: 100vw; */
+    min-height: 100vh;
+    /* width: 100%;
+    min-height: 100%; */
+    background-color: #1e1e20;
+    /* #252246 */
+    /* overflow: hidden; */
+    /* width: 200px; */
+
+  }
+  
+  .view-scripts-cards {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: left;
+    align-items: center;
+    /* align-items: left; */
+    /* margin-top: 20px; */   /* Original */
+    /* gap: 20px; */          /* Original */
+
+    /* margin-bottom: -80px;     Added */
+    width: 80vw;
+    /* text-align: left; */
+
+    /* overflow: hidden; */
+    /* width: 201px; */
+
+    /* position: relative; */
+  }
+  
+  .view-scripts-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: left !important;
+    justify-content: center;
+    border-radius: 10px;
+    margin: 10px;
+    box-shadow: 0px 0px 10px #ebe4e4;
+    min-width: 250px;
+    padding: 10px;
+    background: rgb(50, 51, 49);
+
+    /* position: absolute;
+    top: 0; */
+  }
+  
+  .view-scripts-image {
+    /* min-width: 100px;
+    max-width: 150px;
+    min-height: 100px;
+    max-height: 150px;
+    position: relative; */
+    margin-bottom: -240px;
+    /* text-align: left !important; */
+  }
+/* END OF Quick NFT Card Fix From: https://www.youtube.com/watch?v=HFl_oT5tKfo  */
+
+/* My Edits */
+
+/* p {
+    overflow-wrap: normal;
+    text-align: left;
+    width: 80vw;
+    flex-wrap: flex; 
+}  */
+
+/* p { */
+.patient-paragraph {
+    width: inherit;
+    /* margin: 0px; */
+    /* background: gold; */
+  }
+  
+  .ow-anywhere {
+    overflow-wrap: anywhere;
+  }
+  
+  .ow-break-word {
+    overflow-wrap: break-word;
+  }
+  
+  .word-break {
+    word-break: break-all;
+  }
+  
+  .hyphens {
+    hyphens: auto;
+    min-width: 100px;
+    max-width: 300px;
+    text-align: left;
+  }
+
+
+  /* Accordion Attempt 1 from: https://www.youtube.com/watch?v=bGpZrr32ECw  */
+
+  .wrapper {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+  }
+
+  .accordion {
+    /* width: 500px; */
+    flex-direction: column;
+
+    position: absolute;
+    top: 0;
+  }
+
+
+  .item {
+    background: #f0ebe1;
+    margin-bottom: 5px;
+    padding: 10px 20px; 
+    text-align: left;
+
+  }
+
+  .title {
+    color: #85662b;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .title-unfilled {
+    color: #137e04;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .title-filled {
+    color: #d11010;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .contento {
+    /* color: #8b7f75; */
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0,1,0,1);
+  }
+
+  .contento.show {
+    height: auto;
+    max-height: 9999px;
+    transition: all 0.5s cubic-bezier(1,0,1,0);
+  }
+
+
+
+/* Display Success Message */
+  .box_size_success{
+    border-radius: 25px;
+    border: 2px solid #73AD21;
+    padding: 20px; 
+    width:95%;
+    margin:auto;
+}
+
+/* Black Connect Wallet Box v1.0 */
+.box_size_login {
+  border: 5px solid;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px;
+}
+
+.card{
+  height: 600px;
+  width: 400px;
+  background-color: #fff;
+  border-radius: 20px;
+}
+
+/* image{ */
+.image-block {
+  width: 100%;
+  height: 180px;
+  display: block;
+}
+
+.image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.login-wrapper {
+  padding: 100px;
+}
+
+.image--cover {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin: 20px;
+
+  object-fit: cover;
+  object-position: center right;
+}
+
+.image--cover--navbar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+
+  margin-right: 5px;
+
+}
