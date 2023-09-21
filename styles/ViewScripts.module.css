@@ -151,6 +151,8 @@
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
+    overflow-wrap: break-word;
+    flex-wrap: wrap;
   }
 
   .title-unfilled {
@@ -159,6 +161,8 @@
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
+    overflow-wrap: break-word;
+    flex-wrap: wrap;
   }
 
   .title-filled {
@@ -167,6 +171,9 @@
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
+    overflow-wrap: break-word;
+    flex-wrap: wrap;
+
   }
 
   .contento {

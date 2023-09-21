@@ -10,7 +10,7 @@ import Link from "next/link";
 
 import styles from "../styles/ViewScripts.module.css";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import {ethers} from 'ethers';
 
@@ -33,11 +33,18 @@ export const PatientOwnedNFTs: React.FC<PatientOwnedNFTsProps> = ({ ownedNFTs, i
 // const [selectedNFT, setSelectedNFT] = useState<any | null>(null);
 const [selectedNFT, setSelectedNFT] = useState(null);
 
+const [resetDropDown,setResetDropDown] = useState('')
+
 const toggleNFT = (item: any) => {
 if (selectedNFT === item) {
     setSelectedNFT(null);
+    // setResetDropDown('')
 } else {
     setSelectedNFT(item);
+    setTransferAddress('')
+    setShowName('')
+    handleBlur(item)
+    // setResetDropDown('selected')
 }
 };
 
@@ -52,11 +59,10 @@ const displayTotalMessage = () => {
 }
 
 
-    const [transferAddress, setTransferAddress] = useState("");
 
-    const handleTransferConfirmation = () => {
-        alert("Success! Transfer has been sent!")
-    }
+const handleTransferConfirmation = () => {
+    alert("Success! Your Prescription has been transferred to your pharmacy!")
+}
 
 //Load Pharmacies
 const [pharmacy, setPharmacy] = useState([]);
@@ -68,39 +74,56 @@ useEffect(()=> {
         console.log(result);
         setPharmacy(result.data.records);      
     }
-
+    
     loadViewPharmacy();
 }, [])
 
+    const [selectedPharmacyWallets, setSelectedPharmacyWallets] = useState<{ [key: string]: string }>({});
+    const [transferAddress, setTransferAddress] = useState("");
 
+    
+    // const [selectedPharmacyNames, setselectedPharmacyNames] = useState<{ [key: string]: string }>({});
     const [showName,setShowName] = useState('')
+    // const [showName, setShowName] = useState<{ [key: string]: string }>({});
 
 
-    const handlePharmacyChange=(e: any, id: any)=>{
+    // const handlePharmacyChange=(e: any, id: any)=>{
+    const handlePharmacyChange=(e: React.ChangeEvent<HTMLSelectElement>, cardId: string) => {
         // setRxWallet({...rxWallet,[e.target.name]: e.target.value, tokenId: id })
         // console.log('handleChange just updated:',rxWallet);
-
+      
         const {value, options } = e.target
         const rawName = options[e.target.selectedIndex].text;
         const formattedName = rawName.substring(0, rawName.indexOf(" ["));
         setShowName(formattedName)
-        setTransferAddress(e.target.value)
+        
+setTransferAddress(e.target.value)
+                // const transferAddress = e.target.value
+    // Update the selected pharmacy for the specific card
+        setSelectedPharmacyWallets((prevselectedPharmacyNames) => ({
+            ...prevselectedPharmacyNames,
+            [cardId]: transferAddress,
+        }));
 
         // setRxWallet({...rxWallet,[e.target.name]: e.target.value, tokenId: id, pharmacyName: options[e.target.selectedIndex].text })
-        console.log("showName is now ", showName);
-        console.log('transferAddress is now', transferAddress);
+        console.log("Selected Pharmacy showName is now ", showName);
+        console.log('Selected Pharmacy transferAddress is now', transferAddress);
         console.log("event in handlePharmacyChange is ", e)
+
+        // let display_selected_pharmacy_ref = displaySelectedPharmacyRef.current.value
     }
 
 
-    // const [pharmacyFax, setPharmacyFax] = useState({
-    //     pharmacy_name: "",
-    //     pharmacy_wallet: "",
-    //     pharmacy_phone:"",
-    //     pharmacy_fax:"",
-    //     pharmacy_address:"",
-    //     id:""
-    // });    
+    const handleBlur = (cardId: string) => {
+            // Clear the selected pharmacy for the specific card
+            setSelectedPharmacyWallets((prevSelectedPharmacies) => ({
+            ...prevSelectedPharmacies,
+            [cardId]: '',
+            }));
+      };
+
+
+    //   const displaySelectedPharmacyRef = useRef("");  
 
     return (
 
@@ -200,14 +223,24 @@ useEffect(()=> {
                                 
                                                 <div className={`${styles['input-group-mb-3']}`}>
 
-                                                    <select className="form-select" aria-label="Select A Medication" name="pharmacy" onChange={(e) => handlePharmacyChange(e, nft.metadata.id)} >
+                                                    <select className="form-select" aria-label="Select A Medication" name="pharmacy" 
+                                                        onChange={(e) => handlePharmacyChange(e, nft.metadata.id)} 
+                                                        onBlur={() => handleBlur(nft.metadata.id)} // Clear the selected pharmacy on blur
+                                                        // value={selectedPharmacyWallets[nft.metadata.id] || ''}
+                                                        // value={transferAddress != "" ? selectedPharmacyWallets[nft.metadata.id] || '' : ''}  
+                                                        // ref={displaySelectedPharmacyRef}  
+                                                        value={showName}                                     
+                                                    >
                                                         <option selected value="">Select a Pharmacy...</option>
 
                                                         {pharmacy.map((pharmacy: any) => (
                                                             <option 
-                                                                value={`${pharmacy.pharmacy_wallet}`}                                                                                  
+                                                               
+                                                                value={`${pharmacy.pharmacy_wallet}`}                                                               
+
                                                                 key={`${pharmacy.id}`}>
                                                                     {pharmacy.pharmacy_name} [{addressShortener(pharmacy.pharmacy_wallet)}]
+
                                                             </option>                                                                            
                                                         ))}
 
@@ -232,13 +265,16 @@ useEffect(()=> {
 
 
 
-                                            {transferAddress != "" && (
+                                            {/* {transferAddress != "" && ( */}
+                                            {showName != "" && transferAddress != "" && (
                                                 
                                                     <Web3Button
                                                         contractAddress={solidityContractAddress}
                                                         action={(contract) => contract.erc721.transfer(transferAddress, nft.metadata.id)}
                                                         onSubmit={() => setTransferAddress("")}
                                                         onSuccess={() => {handleTransferConfirmation}}
+                                                        style={{backgroundColor:"yellow",color:"b"}}
+                                                        className="btn btn-warning btn-lg btn-black"
                                                     >Transfer to {showName} ({addressShortener(transferAddress)})</Web3Button>
                                             )}
                                     </div>
