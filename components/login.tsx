@@ -1,3 +1,4 @@
+//Attempting Vercel
 // Created at (15:37): https://youtu.be/D58EhH2em5s?si=DDOCFXWx2fAcd4vv&t=937
 import { useState } from 'react';
 
@@ -56,7 +57,7 @@ export const Login: React.FC<LoginProps> = ({ isOpen, onClose }) => {
 //Check if they lack username or password and exit function if missing either: 
       if(!username || !password) return;
   //otherwise: 
-      try {
+      try { 
           setIsLoading(true); 
           //connect to smart wallet using function created: 
 
@@ -82,7 +83,7 @@ export const Login: React.FC<LoginProps> = ({ isOpen, onClose }) => {
           console.error("Error in login.tsx connectWallet catch block is ", error); 
           setError((error as any).message);
       }
-  };
+  }
 
 
 // (16:54) - Check for various states: 

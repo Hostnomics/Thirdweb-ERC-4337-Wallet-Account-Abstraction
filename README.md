@@ -67,3 +67,34 @@ At [(45:40)](https://youtu.be/D58EhH2em5s?si=ibSf1TESITT0N4E9&t=2740) of the tut
    export default function NFTClaim({ contractMetadata }: ClaimProps) {
 
 ```
+
+## Deploy to cPanel server
+
+- Follow this [great youtube tutorial](https://www.youtube.com/watch?v=1ykSXau838c)
+- See [Next.js Docs on configuring a Custom Server](https://nextjs.org/docs/pages/building-your-application/configuring/custom-server)
+- In **package.json** change `dev`, `build` and ``:
+
+```js
+//in package.json:
+  "scripts": {
+    // "dev": "next dev",
+    // "build": "next build",
+    // "start": "next start",
+    "dev": "node server.js",
+    "build": "next build",
+    "start": "NODE_ENV=production node server.js",
+
+    "lint": "next lint",
+    "export": "next export",
+    "deploy": "next build && next export && npx thirdweb@latest upload out"
+  },
+
+```
+
+## Install Next.js
+
+1 - **Create Node.js App**
+
+cloudlinux-selector create --json --interpreter nodejs --version 14.21.3 --app-root smartwallet.rxminter.com --domain smartwallet.rxminter.com --app-uri smartwallet.rxminter.com
+
+curl -sL https://rpm.nodesource.com/setup_14.x | sudo bash -

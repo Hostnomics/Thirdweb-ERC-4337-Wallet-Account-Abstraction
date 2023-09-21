@@ -108,7 +108,7 @@ export const OwnedNFTs: React.FC<OwnedNFTsProps> = ({ ownedNFTs, isLoading }) =>
 
                     }}>
                         {/* You don't own any collectibles yet! */}
-                        You don't have any prescriptions yet. 
+                        You do not have any prescriptions yet. 
                     </p>
 
                 </div>

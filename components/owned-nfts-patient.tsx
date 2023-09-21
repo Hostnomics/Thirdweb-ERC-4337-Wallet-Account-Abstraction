@@ -132,7 +132,7 @@ useEffect(()=> {
                 // }}>
 
                     ownedNFTs.map((nft: any) => (
-                        <div className={`${styles['item']}`}> 
+                        <div className={`${styles['item']}`} key={nft.metadata.id}> 
                                     {nft.metadata.attributes[2].value - nft.metadata.attributes[3].value !== 0 ? (
                                         <div className={`${styles['title']}`} onClick={() => toggleNFT(nft.metadata.id)}> 
                                             <h4>{nft.metadata.attributes[0].value} - {convertBigNumberToFourDigitYear(nft.metadata.attributes[5].value)}  </h4>
@@ -260,7 +260,41 @@ useEffect(()=> {
             )
 
             ) : (
-                <h2>There are no prescriptions found for your Wallet Address on the blockchain at this time.</h2>        
+                <div className="row mt-3">
+                <div className="col-sm-1">
+  
+                </div>
+  
+  
+                <div className="col-sm-10">
+                      <div className="card bg-light mb-3">
+                          <div className='card-header bg-light'>
+                            <h5 className="text-center">No NFT Scripts Found</h5>
+                          </div>
+                          <div className='card-body'>
+                           
+                              <h5 className="card-text text-center">You do not currently have any NFT prescriptions in your wallet.</h5>
+                           
+                            <div className="text-center">
+                            </div>
+                          </div>
+  
+                          <div className='card-footer'>
+                              <div className="row text-center">
+                                    <i>If you have questions, please contact your provider or pharmacy.</i>
+                              </div>
+                          </div>
+                                {/* 
+                                    <hr></hr>
+                                    <div className="row">
+                                        <button onClick={() => setError("")} className="btn btn-outline-primary btn-lg btn-block">
+                                            Forgot your password? Click here to reset it.
+                                        </button>
+                                  </div> */}
+                        </div>
+                  </div>
+  
+            </div>        
       )}
 </div>
 </div>

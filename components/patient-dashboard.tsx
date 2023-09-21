@@ -21,6 +21,9 @@ import Link from "next/link";
 
 import { addressShortener, formatDateTwoDigitYear, formatDateFourDigitYear, convertBigNumberToFourDigitYear} from '../lib/utils'; 
 
+import Axios from 'axios'
+
+import {useState, useEffect} from 'react'
 
 export const PatientDashboard = ({
     username,
@@ -70,7 +73,38 @@ const ConnectedInner = ({ username } : { username: string} ) => {
     //     window.location.reload();
     // }
 
+//Get patient name from address via axios
+useEffect(() => {
+    const wallet_address = address
+    
+        const loadPatient = async () => {
+            const result = await Axios.get("https://rxminter.com/php-react/patient-get-by-address.php?wallet_address="+wallet_address);
+            console.log("loadPatient() in patient-dashboard.tsx found:",result);
+            setPatient(result.data.records);    
+            setPatientName(result.data.name)  
+        }
 
+        loadPatient()
+    },[ownedNFTsLoading])
+
+    const [patientName,setPatientName] = useState('')
+
+    const [patient, setPatient] = useState({
+        name: "",
+        wallet_address: "",
+        email:"",
+        dob:"",
+        pt_physical_address:"",
+        pt_phone:"",
+        pt_primary_insurance:"",
+        pt_primary_id:"",
+        pt_secondary_insurance:"",
+        pt_secondary_id:"",
+        pid:""
+    });    
+// const result = await axios.get("https://rxminter.com/php-react/patient-get-by-address.php?wallet_address="+wallet_address);
+// setPatient(result.data); //lags, shows up on second load/pharamcy select run
+//     console.log("inside svg function pt_phone is",result.data.pt_phone)
 
     return (
         <div className={styles.appContainer}>
@@ -81,7 +115,7 @@ const ConnectedInner = ({ username } : { username: string} ) => {
                     <>
                         <div className="mt-5">
                             {/* <h1 className="text-center">Welcome <span className={styles.gradientText1}>{username}</span> To Your Prescription Dashboard</h1> */}
-                            <h1 className="text-center">Welcome <span className={styles.gradientText1}>Ian McGregor</span> To Your Prescription Dashboard</h1>
+                            <h1 className="text-center">Welcome <span className={styles.gradientText1}>{patientName ? patientName : ''}</span> To Your Prescription Dashboard</h1>
 
                             {/* <p className={styles.addressPill}>Short Version: {truncateAddress(address!)}</p> */}
                             {/* <p className={styles.addressPill}>Your Wallet Address: {address}</p> */}
