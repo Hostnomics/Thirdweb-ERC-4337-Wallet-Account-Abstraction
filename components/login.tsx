@@ -238,7 +238,7 @@ export const Login: React.FC<LoginProps> = ({ isOpen, onClose }) => {
                                   type="email"
                                   placeholder="Enter your email address"
                                   value={username}
-                                  onChange={(e) => setUsername(e.target.value)}
+                                  onChange={(e) => setUsername(e.target.value.toLowerCase())}
                                 />
                       </div>
 
@@ -249,7 +249,7 @@ export const Login: React.FC<LoginProps> = ({ isOpen, onClose }) => {
                                   type="password"
                                   placeholder="Enter your Password"
                                   value={password}
-                                  onChange={(e) => setPassword(e.target.value)}
+                                  onChange={(e) => setPassword(e.target.value.toLowerCase())}
                                 />
                       </div>
 
