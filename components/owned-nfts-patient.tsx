@@ -203,10 +203,10 @@ useEffect(()=> {
                                                     <select className="form-select" aria-label="Select A Medication" name="pharmacy" onChange={(e) => handlePharmacyChange(e, nft.metadata.id)} >
                                                         <option selected value="">Select a Pharmacy...</option>
 
-                                                        {pharmacy.map((pharmacy: any, index) => (
+                                                        {pharmacy.map((pharmacy: any) => (
                                                             <option 
                                                                 value={`${pharmacy.pharmacy_wallet}`}                                                                                  
-                                                                key={`${index}`}>
+                                                                key={`${pharmacy.id}`}>
                                                                     {pharmacy.pharmacy_name} [{addressShortener(pharmacy.pharmacy_wallet)}]
                                                             </option>                                                                            
                                                         ))}
