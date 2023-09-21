@@ -2,7 +2,7 @@
 
 // import { MediaRenderer, ThirdwebNftMedia } from "@thirdweb-dev/react"
 import { useAddress, useContract, ConnectWallet, useOwnedNFTs, ThirdwebNftMedia, 
-    useTransferNFT, useMetadata, useNFT, MediaRenderer } from "@thirdweb-dev/react";
+    useTransferNFT, useMetadata, useNFT, MediaRenderer, Web3Button } from "@thirdweb-dev/react";
 
 import { NFT } from "@thirdweb-dev/sdk"
 
@@ -10,11 +10,15 @@ import Link from "next/link";
 
 import styles from "../styles/ViewScripts.module.css";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import {ethers} from 'ethers';
 
 import { addressShortener, formatDateTwoDigitYear, formatDateFourDigitYear, convertBigNumberToFourDigitYear} from '../lib/utils'; 
+
+import { THIRDWEB_API_KEY, chain, nftCollection, solidityContractAddress } from '../lib/constants' 
+
+import Axios from 'axios'
 
 type PatientOwnedNFTsProps = {
     ownedNFTs: NFT[]
@@ -46,6 +50,57 @@ const displayTotalMessage = () => {
         return ``
     }
 }
+
+
+    const [transferAddress, setTransferAddress] = useState("");
+
+    const handleTransferConfirmation = () => {
+        alert("Success! Transfer has been sent!")
+    }
+
+//Load Pharmacies
+const [pharmacy, setPharmacy] = useState([]);
+
+useEffect(()=> { 
+    // Make call to server to pull pharmacies:
+    const loadViewPharmacy = async () => {
+        const result = await Axios.get("https://rxminter.com/php-react/view-pharmacy.php");
+        console.log(result);
+        setPharmacy(result.data.records);      
+    }
+
+    loadViewPharmacy();
+}, [])
+
+
+    const [showName,setShowName] = useState('')
+
+
+    const handlePharmacyChange=(e: any, id: any)=>{
+        // setRxWallet({...rxWallet,[e.target.name]: e.target.value, tokenId: id })
+        // console.log('handleChange just updated:',rxWallet);
+
+        const {value, options } = e.target
+        const rawName = options[e.target.selectedIndex].text;
+        const formattedName = rawName.substring(0, rawName.indexOf(" ["));
+        setShowName(formattedName)
+        setTransferAddress(e.target.value)
+
+        // setRxWallet({...rxWallet,[e.target.name]: e.target.value, tokenId: id, pharmacyName: options[e.target.selectedIndex].text })
+        console.log("showName is now ", showName);
+        console.log('transferAddress is now', transferAddress);
+        console.log("event in handlePharmacyChange is ", e)
+    }
+
+
+    // const [pharmacyFax, setPharmacyFax] = useState({
+    //     pharmacy_name: "",
+    //     pharmacy_wallet: "",
+    //     pharmacy_phone:"",
+    //     pharmacy_fax:"",
+    //     pharmacy_address:"",
+    //     id:""
+    // });    
 
     return (
 
@@ -130,9 +185,62 @@ const displayTotalMessage = () => {
                                     <div className={`${styles['view-scripts-card']}`}>
 
                                         {/* <Link className="btn btn-primary" href={`/patient-fax-script/${nft.metadata.id}`}>Send {nft.metadata.attributes[0].value} To A Pharmacy</Link> */}
-                                        <Link className="btn btn-primary" href={`https://doctors.rxminter.com/fax-prescription/${nft.metadata.id}`}>Send {nft.metadata.attributes[0].value} To A Pharmacy</Link>
-                                        
+                                        {/* <Link className="btn btn-primary" href={`https://doctors.rxminter.com/fax-prescription/${nft.metadata.id}`}>Send {nft.metadata.attributes[0].value} To A Pharmacy</Link> */}
+                                        {/* <input 
+                                                type="text"
+                                                placeholder="0x00000"                                               
+                                                value={transferAddress}
+                                                onChange={(e) => setTransferAddress(e.target.value)}
+                                               
+                                        /> */}
+                                    <h5 className="text-center display-8" style={{color:"white"}}>Select A Pharmacy from the drop down menu below:</h5>
+                            <form>
 
+                                        <div className={`${styles['view-scripts-card']}`}>
+                                
+                                                <div className={`${styles['input-group-mb-3']}`}>
+
+                                                    <select className="form-select" aria-label="Select A Medication" name="pharmacy" onChange={(e) => handlePharmacyChange(e, nft.metadata.id)} >
+                                                        <option selected value="">Select a Pharmacy...</option>
+
+                                                        {pharmacy.map((pharmacy: any, index) => (
+                                                            <option 
+                                                                value={`${pharmacy.pharmacy_wallet}`}                                                                                  
+                                                                key={`${index}`}>
+                                                                    {pharmacy.pharmacy_name} [{addressShortener(pharmacy.pharmacy_wallet)}]
+                                                            </option>                                                                            
+                                                        ))}
+
+                                                    </select>     
+                                                </div>
+
+                                                    {/* <input type="hidden" name="tokenIdInput" value={nft.metadata.id} ref={inputTokenId}></input> */}
+                                                
+                                                {/* <div className="row">
+                                                    <div className="col-md-12">
+                                                    
+                                                        <button type="submit" className="btn btn-success">Submit {nft.metadata.medication} To Pharmacist</button>
+                                                    </div>
+                                                </div> */}
+                                        </div>
+                                </form>
+
+
+
+
+
+
+
+
+                                            {transferAddress != "" && (
+                                                
+                                                    <Web3Button
+                                                        contractAddress={solidityContractAddress}
+                                                        action={(contract) => contract.erc721.transfer(transferAddress, nft.metadata.id)}
+                                                        onSubmit={() => setTransferAddress("")}
+                                                        onSuccess={() => {handleTransferConfirmation}}
+                                                    >Transfer to {showName} ({addressShortener(transferAddress)})</Web3Button>
+                                            )}
                                     </div>
 
                                 </>
@@ -152,7 +260,7 @@ const displayTotalMessage = () => {
             )
 
             ) : (
-                <h2>Nada</h2>        
+                <h2>There are no prescriptions found for your Wallet Address on the blockchain at this time.</h2>        
       )}
 </div>
 </div>

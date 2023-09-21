@@ -109,7 +109,7 @@ export async function connectToSmartWallet(
         return smartWallet;
 
     } else {
-      
+
 //IF THEY DON'T HAVE AN ACCOUNT REGISTERED TO THEIR USERNAME WE CREATE THAT ACCOUNT HERE: (35:20)
         statusCallback?.("New username, generating personal wallet...");
         await personalWallet.generate();
@@ -147,3 +147,108 @@ export async function connectToSmartWallet(
 }
 
 //See summary of above at (38:55): https://youtu.be/D58EhH2em5s?si=qA6bRaGLwWQFpDN9&t=2335
+
+
+//Wed 9/20/2023 GR day, attempt to return accountNotFound Test
+// 4. (28:24) function to either
+  // 3A. Generate and upload the local wallet to IPFS, OR
+  // 3B. Download the metadata and import it and connect it to our wallet. 
+  export async function connectToPublicSmartWallet(
+    username: string,
+    pwd: string,
+    statusCallback?: (status: string) => void
+  ): Promise<SmartWallet> {
+      //check username
+      statusCallback?.("Checking if patient has a smart wallet on the blockchain...");
+  
+      //get an instance of the Thirdweb SDK (29:43)
+      const sdk = new ThirdwebSDK(
+          chain,
+          {
+            clientId: THIRDWEB_API_KEY || "",
+          }
+      )
+  
+      const smartWalletAddress = await getWalletAddressForUser(sdk, username);
+  
+      //custom isDeployed function
+      const isDeployed = await isContractDeployed(
+        smartWalletAddress,
+        sdk.getProvider()
+      );
+  
+      //each flow will need a smart wallet and contract addresss
+      //(31:27) - create new smart wallet with our fn above
+      const smartWallet = createSmartWallet(); 
+      // create personal wallet
+      const personalWallet = new LocalWallet(); 
+  
+      //check if contract deployed (31:49)
+      if (isDeployed) {
+          statusCallback?.("Email account exists, accessing onchain data...")
+          const contract = await sdk.getContract(smartWalletAddress);
+          const metadata = await contract.metadata.get(); 
+  
+          //get encrypted Wallet
+          const encryptedWallet = metadata.encryptedWallet; 
+          if (!encryptedWallet) {
+            throw new Error("No encrypted wallet found");
+          }
+  
+          statusCallback?.("Decrypting patient's smart wallet...");
+  
+          //Decrypt it using our password (33:31)
+          await new Promise((resolve) => setTimeout(resolve,300));
+          //Import our encrypted wallet and decrypt it with password: 
+          await personalWallet.import({
+            encryptedJson: encryptedWallet,
+            password: pwd,
+          });
+  
+          //connect to personalWallet we just decrypted
+          statusCallback?.("Connecting to smart wallet...");
+          await smartWallet.connect({
+            personalWallet
+          });
+  
+          return smartWallet;
+  
+      } else {
+        
+  //IF THEY DON'T HAVE AN ACCOUNT REGISTERED TO THEIR USERNAME WE CREATE THAT ACCOUNT HERE: (35:20)
+          statusCallback?.("Email NOT found on the blockchain, notifying patient to try again...");
+          throw new Error(`Email ${username} is not registered on the blockchain. Please enter the correct email address or contact your provider for further assistance.`);
+          // return setAccountNotFound(true)
+          // await personalWallet.generate();
+  
+          // const encryptedWallet = await personalWallet.export({
+          //   strategy: "encryptedJson",
+          //   password: pwd,
+          // });
+  
+          // await smartWallet.connect({
+          //   personalWallet
+          // });
+  
+    //Caveat @ (37:00) - a BRAND NEW smart wallet is not deployed until it has a first transaction. 
+          //Manually deploy wallet, upload json, etc.
+          // await smartWallet.deploy(); 
+  
+          // const contract = await smartWallet.getAccountContract(); 
+  
+          // const encryptedWalletUri = await sdk.storage.upload({
+          //     name: username,
+          //     encryptedWallet,
+          // });
+  
+      //(38:35) register username
+          // await contract.call(
+          //   "register",
+          //   [username, encryptedWalletUri]
+          // );
+  
+          // return smartWallet;
+  
+      }
+  
+  }

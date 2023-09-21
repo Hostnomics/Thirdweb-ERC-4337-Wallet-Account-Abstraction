@@ -9,7 +9,7 @@ import styles from "../styles/Home.module.css";
 import loadingLottie from '../assets/lottie/loading.json';
 // import loadingLottie from '../assets/lottie/loading.json';
 import LottieLoader from 'react-lottie-loader';
-import { connectToSmartWallet } from '../lib/wallets';
+import { connectToSmartWallet, connectToPublicSmartWallet } from '../lib/wallets';
 import { Connected } from './connected';
 import { PatientDashboard } from './patient-dashboard';
 
@@ -59,7 +59,15 @@ export const Login: React.FC<LoginProps> = ({ isOpen, onClose }) => {
       try {
           setIsLoading(true); 
           //connect to smart wallet using function created: 
-          const wallet = await connectToSmartWallet(
+
+//*********************  WED 9/20/2023 GR Day Test email not found: ************************************************************************//
+          // const wallet = await connectToSmartWallet(
+          //   username,
+          //   password,
+          //   (status) => setLoadingStatus(status)
+          // );
+
+          const wallet = await connectToPublicSmartWallet(
             username,
             password,
             (status) => setLoadingStatus(status)
@@ -154,8 +162,12 @@ export const Login: React.FC<LoginProps> = ({ isOpen, onClose }) => {
                           <h5 style={{color:"white"}} className="text-center">Unable to Connect to your Account</h5>
                         </div>
                         <div className='card-body'>
-                          <h5 className="card-text text-center">The password you tried did not work. Please try again.</h5>
-
+                          {error == "invalid password" && 
+                            <h5 className="card-text text-center">Your email is registered. <br></br>However, the password you tried did not work. Please try again.</h5>
+                          }
+                          <div className="text-center">
+                            <i style={{color:"red"}} className="text-center">Error Message: {error}</i>
+                          </div>
                         </div>
 
                         <div className='card-footer'>
@@ -177,7 +189,10 @@ export const Login: React.FC<LoginProps> = ({ isOpen, onClose }) => {
 
           </div>
   </>
+
   ) : (
+
+
       <>
             <Navbar gotAddress={address} logout={false}/>
             <div className="row mt-5">

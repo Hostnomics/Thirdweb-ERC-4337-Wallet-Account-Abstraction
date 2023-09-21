@@ -66,9 +66,9 @@ const ConnectedInner = ({ username } : { username: string} ) => {
         isLoading: ownedNFTsLoading,
     } = useOwnedNFTs(contract, address);
 
-    function handleRefresh(){
-        window.location.reload();
-    }
+    // function handleRefresh(){
+    //     window.location.reload();
+    // }
 
 
 

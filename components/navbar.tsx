@@ -9,6 +9,7 @@ import React from 'react'
 
 
 import Link from "next/link";
+// import {useRouter} from "next/router";
 
 type NavbarProps = {
     gotAddress: string | undefined;
@@ -26,10 +27,19 @@ export const Navbar: React.FC<NavbarProps> = ({ gotAddress, logout }) => {
             return gotAddress.slice(0,6) + "..." + gotAddress.slice(-4);
         }
 
-        function handleRefresh(){
-            window.location.reload();
-        }
+        // function handleRefresh(){
+        //     window.location.reload();
+        // }
 
+        // const handleLogOut = (e: React.MouseEvent<HTMLDivElement>) => {
+        const handleLogOut = (e: any) => {
+            // if (e.currentTarget === e.target) {
+            //   onClose(); 
+            window.location.reload();
+            // }
+          };
+
+        // const router = useRouter();
 
     return (
         // <ConnectWallet 
@@ -71,7 +81,8 @@ export const Navbar: React.FC<NavbarProps> = ({ gotAddress, logout }) => {
                     side: 'bottom'
                 }} /> */}
                
-                <button className='btn btn-light' onClick={handleRefresh}>Log Out</button>
+                <button className='btn btn-light' onClick={(e) => handleLogOut(e)}>Log Out</button>
+                {/* <button className='btn btn-light' onClick={() => router.push("/")}>Log Out</button> */}
             </li>
 
                                 {/* <li className="nav-item" style={{margin:"5px"}}>
