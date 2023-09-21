@@ -12,6 +12,9 @@ import { NavbarDashboard } from "../components/navbar-dashboard";
 import { Navbar } from "../components/navbar";
 import { PatientDashboard } from '../components/patient-dashboard';
 
+//From https://github.com/vercel/next.js/blob/canary/examples/head-elements/pages/index.tsx
+//via docs: https://nextjs.org/docs/pages/api-reference/components/head
+import Head from 'next/head'
 
 // Built out at (14:10): https://youtu.be/D58EhH2em5s?si=sgh2IcY71F9OPgf-&t=850
 const Home: NextPage = () => {
@@ -24,7 +27,11 @@ const Home: NextPage = () => {
 
   return (
     <> 
-
+      <Head>
+        <title>Acme Healthchain</title>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
   {!isModalOpen && (
     <>
         <NavbarDashboard displayNav={true} logout={false}/>
