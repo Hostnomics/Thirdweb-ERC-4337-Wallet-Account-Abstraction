@@ -11,12 +11,15 @@ import loadingLottie from '../assets/lottie/loading.json';
 import LottieLoader from 'react-lottie-loader';
 
 import { NFTClaim } from '../components/nft-claim'
-import { OwnedNFTs } from '../components/owned-nfts'
+// import { OwnedNFTs } from '../components/owned-nfts'
+import { PatientOwnedNFTs } from '../components/owned-nfts-patient'
 
 import {Navbar} from './navbar';
 // import { NavbarDashboard } from "./navbar-dashboard";
 
 import Link from "next/link";
+
+import { addressShortener, formatDateTwoDigitYear, formatDateFourDigitYear, convertBigNumberToFourDigitYear} from '../lib/utils'; 
 
 
 export const PatientDashboard = ({
@@ -101,14 +104,17 @@ const ConnectedInner = ({ username } : { username: string} ) => {
                     />
                 </div>
             ) : (
-                <div className={styles.nftContainer}>
-                        <div style={{ textAlign: "center" }}>
+                // <div className={styles.nftContainer}>
+                <div className="mt-5">
+                        {/* <div style={{ textAlign: "center" }}>
                                 <NFTClaim 
                                     contractMetadata={contractMetadata}
                                 />
-                        </div>
-                        <div className={styles.nftSection}>
-                                <OwnedNFTs 
+                        </div> */}
+
+                        {/* <div className={styles.nftSection}> */}
+                        <div>
+                                <PatientOwnedNFTs 
                                     ownedNFTs={ownedNFTs!}
                                     isLoading={ownedNFTsLoading}
                                 />
