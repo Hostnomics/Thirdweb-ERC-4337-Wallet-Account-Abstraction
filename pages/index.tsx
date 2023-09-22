@@ -57,7 +57,7 @@ const Home: NextPage = () => {
 
                             <div className='card-footer'>
                                 <div className="row">
-                                      <button onClick={() => setIsOpen(true)} className="btn btn-success btn-lg btn-block">
+                                      <button onClick={() => setIsOpen(true)} className="btn btn-primary btn-lg btn-block">
                                           Click Here To Login
                                       </button>
                                 </div>

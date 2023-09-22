@@ -258,7 +258,7 @@ export const Login: React.FC<LoginProps> = ({ isOpen, onClose }) => {
                 <div className={isOpen ? `card-footer` : ""}>
 
                       <div className="row">
-                            <button className="btn btn-success btn-large btn-block"
+                            <button className="btn btn-primary btn-large btn-block"
                               onClick={() => connectWallet()}
                             >
                                 Login
