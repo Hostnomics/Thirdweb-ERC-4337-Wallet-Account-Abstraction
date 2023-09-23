@@ -155,16 +155,20 @@ setTransferAddress(e.target.value)
                 // }}>
 
                     ownedNFTs.map((nft: any) => (
-                        <div className={`${styles['item']}`} key={nft.metadata.id}> 
+                        <div className={`${styles['item']}`} key={nft.metadata.id} style={{width:"100%"}}> 
                                     {nft.metadata.attributes[2].value - nft.metadata.attributes[3].value !== 0 ? (
+
                                         <div className={`${styles['title']}`} onClick={() => toggleNFT(nft.metadata.id)}> 
                                             <h4>{nft.metadata.attributes[0].value} - {convertBigNumberToFourDigitYear(nft.metadata.attributes[5].value)}  </h4>
                                             <span>{selectedNFT == nft.metadata.id ? ' [ - ]' : ' [ + ]'}</span>
                                         </div>
+
                                     ) : (
+                                        
                                         <div className={`${styles['title-filled']}`} onClick={() => toggleNFT(nft.metadata.id)}> 
-                                            <h4>{nft.metadata.attributes[0].value} - {convertBigNumberToFourDigitYear(nft.metadata.attributes[5].value)}  </h4>
-                                            <span>{selectedNFT == nft.metadata.id ? ' [ - ]' : ' [ + ]'}</span>
+                                                                {/* title-filled  */}
+                                            <h4 >{nft.metadata.attributes[0].value} - {convertBigNumberToFourDigitYear(nft.metadata.attributes[5].value)}  </h4>
+                                            <span style={{color:"red"}}>{selectedNFT == nft.metadata.id ? ' [ - ]' : ' [ + ]'}</span>
                                         </div>
                                     )}
                                     
@@ -281,12 +285,57 @@ setTransferAddress(e.target.value)
 
                                 </>
                             ) : (
-                                <div className={`${styles['view-scripts-card']}`}>    
-                                                          
-                                    <div className="input-group-mb">
-                                        <p><b style={{color:"white"}}>Medication Filled: {convertBigNumberToFourDigitYear(nft.metadata.attributes[6].value)}</b></p>                                  
+
+                        <>
+
+                    <div className={`${styles['view-scripts-card']}`}>
+
+                        <div className={`${styles['input-group-mb-3']}`}>
+
+                            {/* <h5 className="text-center display-8" style={{color:"white"}}>Medication {nft?.metadata.attributes[0].value}  */}
+                            <h5 className="text-center display-8" style={{color:"white"}}>Medication was filled on {convertBigNumberToFourDigitYear(nft.metadata.attributes[6].value)}</h5>
+
+                        </div>
+                    </div>
+
+                            {/* <form>
+
+
+                                            <select className="form-select" aria-label="Select A Medication" name="pharmacy" 
+                                                onChange={(e) => handlePharmacyChange(e, nft.metadata.id)} 
+                                                onBlur={() => handleBlur(nft.metadata.id)} // Clear the selected pharmacy on blur
+                                   
+                                                value={showName}                                     
+                                            >
+                                                <option selected value="">Select a Pharmacy...</option>
+
+                                                {pharmacy.map((pharmacy: any) => (
+                                                    <option 
+                                                    
+                                                        value={`${pharmacy.pharmacy_wallet}`}                                                               
+
+                                                        key={`${pharmacy.id}`}>
+                                                            {pharmacy.pharmacy_name} [{addressShortener(pharmacy.pharmacy_wallet)}]
+
+                                                    </option>                                                                            
+                                                ))}
+
+                                            </select>     
+                                        </div>
+
+      
                                     </div>
-                                </div>
+                                </form> */}
+{/* Replaced Old Fill Message with above */}
+                                {/*  <div className={`${styles['view-scripts-card']}`}>     */}
+                                     {/* <div className={`${styles['input-group-mb-3']}`}>                       */}
+                                        {/* <div className="input-group-mb">
+                                            <p><b style={{color:"white"}}>Medication Filled: {convertBigNumberToFourDigitYear(nft.metadata.attributes[6].value)}</b></p>                                  
+                                        </div> */}
+                                     {/* </div> */}
+                                {/*  </div> */}
+
+                                </>
                             )}
                     </div>
                 </div>
