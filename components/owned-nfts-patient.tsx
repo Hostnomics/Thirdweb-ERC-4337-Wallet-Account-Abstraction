@@ -50,9 +50,9 @@ if (selectedNFT === item) {
 
 const displayTotalMessage = () => {
     if (ownedNFTs?.length == 1) {
-        return `There is 1 prescription available for you to manage.`
+        return `There is 1 prescription in your wallet.`
     }else if(ownedNFTs?.length > 1){
-        return `There are ${ownedNFTs?.length} prescriptions available for you to manage.`
+        return `There are ${ownedNFTs?.length} prescriptions in your wallet.`
     }else{
         return ``
     }
